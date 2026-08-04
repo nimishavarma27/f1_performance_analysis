@@ -298,7 +298,7 @@ The roadmap is organised in phases so users and contributors can see what is alr
 - Fastest-lap telemetry, speed trap, mini-sector, corner, and track-map analysis on demand
 - Telemetry download and resilience when telemetry channels are unavailable
 
-### Phase 3 — Comparison experience and dashboard polish (next)
+### Phase 3 — Comparison experience and dashboard polish
 
 - Add a visible two-driver fastest-lap comparison control and panel.
 - Add the distance-based delta-time chart, including who gains/loses time through each part of the lap.
@@ -372,4 +372,3 @@ Contributions are welcome. A good workflow is:
 
 ## License
 
-Add a license file before publishing if you want to define how others may use, modify, and distribute this project. Until then, the repository should be treated as all rights reserved by its owner.

@@ -1,0 +1,198 @@
+/* Global visual system. Palette values are injected by utils/ui.py. */
+
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"],
+.stApp {
+    background: var(--f1-background) !important;
+    color: var(--f1-text) !important;
+}
+
+.block-container {
+    max-width: 1600px;
+    padding: 2rem 2.5rem 3rem;
+}
+
+/* Header */
+.f1-hero {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 2rem;
+    padding: 2.25rem 2.5rem;
+    border: 1px solid var(--f1-border);
+    border-radius: 22px;
+    background: linear-gradient(120deg, var(--f1-card-background), var(--f1-secondary-background));
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+}
+
+.f1-hero::after {
+    content: "";
+    position: absolute;
+    top: -75%;
+    right: -8%;
+    width: 42%;
+    height: 250%;
+    transform: rotate(24deg);
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--f1-accent) 30%, transparent));
+    pointer-events: none;
+}
+
+.f1-kicker {
+    margin: 0 0 0.5rem;
+    color: var(--f1-accent-secondary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.f1-hero h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: var(--f1-text);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 850;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.f1-hero p:last-child {
+    position: relative;
+    z-index: 1;
+    max-width: 52rem;
+    margin: 0.85rem 0 0;
+    color: var(--f1-muted-text);
+    font-size: 1rem;
+}
+
+/* Typography and page elements */
+h1, h2, h3, p, label, [data-testid="stMarkdownContainer"] {
+    color: var(--f1-text);
+}
+
+h2 {
+    margin-top: 2.1rem !important;
+    padding-left: 0.85rem;
+    border-left: 4px solid var(--f1-accent);
+    font-weight: 780 !important;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    font-weight: 700 !important;
+}
+
+[data-testid="stCaptionContainer"] {
+    color: var(--f1-muted-text);
+}
+
+hr {
+    margin: 2rem 0;
+    border-color: var(--f1-border);
+}
+
+/* Sidebar and controls */
+[data-testid="stSidebar"] > div:first-child {
+    background: var(--f1-secondary-background) !important;
+    border-right: 1px solid var(--f1-border) !important;
+}
+
+[data-testid="stSidebar"] h2 {
+    margin-top: 0.6rem !important;
+}
+
+div[data-baseweb="select"] > div,
+div[data-baseweb="base-input"] > div,
+div[data-baseweb="input"] > div {
+    background: var(--f1-card-background) !important;
+    border-color: var(--f1-border) !important;
+    color: var(--f1-text) !important;
+    border-radius: 10px !important;
+}
+
+div[data-baseweb="select"] * {
+    color: var(--f1-text) !important;
+}
+
+.stButton > button,
+.stDownloadButton > button {
+    width: 100%;
+    border: 1px solid var(--f1-accent) !important;
+    border-radius: 10px;
+    background: var(--f1-accent) !important;
+    color: var(--f1-accent-contrast) !important;
+    font-weight: 750;
+    transition: transform 160ms ease, filter 160ms ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    border-color: var(--f1-accent-secondary) !important;
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+/* Cards, data displays, and charts */
+div[data-testid="metric-container"] {
+    min-height: 112px;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--f1-border);
+    border-radius: 15px;
+    background: var(--f1-card-background) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13);
+    transition: transform 160ms ease, border-color 160ms ease;
+}
+
+div[data-testid="metric-container"]:hover {
+    border-color: var(--f1-accent);
+    transform: translateY(-2px);
+}
+
+div[data-testid="stMetricValue"] {
+    color: var(--f1-accent-secondary);
+}
+
+[data-testid="stDataFrame"],
+[data-testid="stPlotlyChart"] {
+    overflow: hidden;
+    border: 1px solid var(--f1-border);
+    border-radius: 15px;
+    background: var(--f1-card-background) !important;
+}
+
+details,
+div[data-testid="stAlert"] {
+    border: 1px solid var(--f1-border);
+    border-radius: 12px;
+    background: var(--f1-card-background);
+}
+
+button[data-baseweb="tab"] {
+    border-radius: 8px;
+    color: var(--f1-muted-text);
+    font-weight: 700;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--f1-accent-secondary);
+}
+
+/* Streamlit chrome */
+footer {
+    visibility: hidden;
+}
+
+#MainMenu {
+    visibility: hidden;
+}
+
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--f1-background); }
+::-webkit-scrollbar-thumb { background: var(--f1-border); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--f1-accent); }
+
+@media (max-width: 700px) {
+    .block-container { padding: 1rem 1rem 2rem; }
+    .f1-hero { padding: 1.6rem; border-radius: 16px; }
+}

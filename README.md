@@ -280,7 +280,7 @@ These modules convert processed data into Plotly figures or Streamlit tables, ca
 
 The roadmap is organised in phases so users and contributors can see what is already available and what comes next.
 
-### Phase 1 — Foundation and core analysis (complete)
+### Phase 1 — Foundation and core analysis 
 
 - Streamlit application shell and sidebar-driven session selection
 - FastF1 data loading and persistent local cache
@@ -289,7 +289,7 @@ The roadmap is organised in phases so users and contributors can see what is alr
 - Basic multi-driver comparison and Plotly visualisation
 - Team colours and theme support
 
-### Phase 2 — Advanced session insights (complete)
+### Phase 2 — Advanced session insights 
 
 - Weekend overview and session rankings
 - Driver statistics and pace consistency
@@ -300,7 +300,7 @@ The roadmap is organised in phases so users and contributors can see what is alr
 
 ### Phase 3 — Comparison experience and dashboard polish
 
-- Add a visible two-driver fastest-lap comparison control and panel.
+- Add a visible two or more -driver fastest-lap comparison control and panel.
 - Add the distance-based delta-time chart, including who gains/loses time through each part of the lap.
 - Group related dashboard outputs into tabs or expanders to make large multi-driver pages easier to scan.
 - Extend the theme system with additional team and accessibility palettes as the dashboard grows.
@@ -308,13 +308,11 @@ The roadmap is organised in phases so users and contributors can see what is alr
 - Improve event/session availability checks and error messages for incomplete or recently published sessions.
 - Add weather-aware lap filtering and correlate pace changes with temperature, rainfall, and wind.
 
-### Phase 4 — Data quality, architecture, and testing
+### Phase 4 — Data quality, architecture
 
 - Introduce typed weekend/session models and a dashboard service layer.
 - Move repeated validation and transformation logic into shared utilities.
-- Add automated unit tests for every processor using cached or fixture FastF1 data.
-- Add integration tests for the Streamlit user flow.
-- Add linting, formatting, type checking, and a GitHub Actions workflow.
+- Add formatting, type checking, and a GitHub Actions workflow.
 - Add a `.gitignore` policy for virtual environments, FastF1 cache files, and Python bytecode.
 
 ### Phase 5 — Deeper performance analysis
@@ -369,6 +367,3 @@ Contributions are welcome. A good workflow is:
 - [FastF1](https://github.com/theOehrly/Fast-F1) for the Formula 1 data-access library.
 - Formula 1 and FIA for the sport and timing ecosystem that make this analysis possible.
 - Streamlit, Pandas, NumPy, Plotly, and Matplotlib for the open-source tools used by the project.
-
-## License
-

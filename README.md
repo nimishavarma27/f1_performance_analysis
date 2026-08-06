@@ -95,6 +95,10 @@ pip install -r requirements.txt
 
 ```bash
 streamlit run app.py
+
+#or
+
+streamlit.exe run app.py
 ```
 
 Streamlit will print a local URL, usually `http://localhost:8501`. Open it in a browser, choose a session in the sidebar, and select one or more drivers.

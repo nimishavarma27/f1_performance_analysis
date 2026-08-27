@@ -7,7 +7,7 @@ def display_fastest_lap_table(df):
     Display the fastest lap ranking table.
     """
 
-    st.header("🏆 Fastest Lap Ranking")
+    st.header("Fastest Lap Ranking")
 
     if df.empty:
         st.info("No lap data available.")

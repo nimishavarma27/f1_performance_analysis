@@ -19,7 +19,7 @@ def display_driver_statistics(statistics):
 
     st.divider()
 
-    st.header("📊 Driver Statistics")
+    st.header("Driver Statistics")
 
     for driver, stats in statistics.items():
 
@@ -30,51 +30,51 @@ def display_driver_statistics(statistics):
         with col1:
 
             st.metric(
-                "🏁 Fastest Lap",
+                "Fastest Lap",
                 stats["Fastest Lap"]
             )
 
             st.metric(
-                "🥇 Best Sector 1",
+                "Best Sector 1",
                 stats["Best Sector 1"]
             )
 
             st.metric(
-                "🏎️ Top Speed",
+                "Top Speed",
                 stats["Top Speed"]
             )
 
         with col2:
 
             st.metric(
-                "📈 Average Lap",
+                "Average Lap",
                 stats["Average Lap"]
             )
 
             st.metric(
-                "🥈 Best Sector 2",
+                "Best Sector 2",
                 stats["Best Sector 2"]
             )
 
             st.metric(
-                "⚡ Average Speed",
+                "Average Speed",
                 stats["Average Speed"]
             )
 
         with col3:
 
             st.metric(
-                "🥉 Best Sector 3",
+                "Best Sector 3",
                 stats["Best Sector 3"]
             )
 
             st.metric(
-                "🏁 Completed Laps",
+                "Completed Laps",
                 stats["Completed Laps"]
             )
 
             st.metric(
-                "🛞 Tyre Stints",
+                "Tyre Stints",
                 stats["Tyre Stints"]
             )
 

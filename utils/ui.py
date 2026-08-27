@@ -1,12 +1,4 @@
-"""
-UI utilities for the F1 Performance Analytics Dashboard.
-
-Responsibilities
-----------------
-- Load global CSS
-- Manage the active theme
-- Provide Plotly layout settings
-"""
+"""UI utilities for the F1 Performance Analytics Dashboard."""
 
 from pathlib import Path
 
@@ -18,21 +10,13 @@ from utils.theme import (
     plotly_layout,
 )
 
-# --------------------------------------------------------
-# Paths
-# --------------------------------------------------------
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-
 CSS_FILE = ROOT_DIR / "assets" / "styles.css"
 
 
-# --------------------------------------------------------
-# CSS
-# --------------------------------------------------------
-
 def _theme_css(theme: dict) -> str:
-    """Create high-priority, palette-specific CSS for Streamlit's shell."""
+    """Palette-specific CSS variables injected into Streamlit's shell."""
 
     return f"""
     <style>
@@ -80,34 +64,28 @@ def _theme_css(theme: dict) -> str:
     """
 
 
+@st.cache_data(show_spinner=False)
+def _read_css_file(path_str: str, mtime: float) -> str:
+    """Cached CSS file read, keyed on mtime."""
+
+    with open(path_str, "r", encoding="utf-8") as file:
+        return file.read()
+
+
 def load_css(theme: dict):
-    """
-    Load the global stylesheet.
-    """
+    """Load the global stylesheet."""
 
     if CSS_FILE.exists():
-
-        with open(CSS_FILE, "r", encoding="utf-8") as file:
-
-            st.markdown(
-                f"<style>{file.read()}</style>",
-                unsafe_allow_html=True
-            )
+        css = _read_css_file(str(CSS_FILE), CSS_FILE.stat().st_mtime)
+        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
     st.markdown(_theme_css(theme), unsafe_allow_html=True)
 
 
-# --------------------------------------------------------
-# Theme
-# --------------------------------------------------------
-
 def initialize_theme():
-    """
-    Initialise the dashboard theme.
-    """
+    """Initialise the dashboard theme state."""
 
     if "dashboard_theme" not in st.session_state:
-
         st.session_state.dashboard_theme = "Dark"
 
     if st.session_state.dashboard_theme not in get_available_themes():
@@ -118,19 +96,12 @@ def initialize_theme():
 
 
 def theme_selector():
-    """
-    Display the sidebar theme selector.
-
-    Returns
-    -------
-    dict
-        Active theme dictionary.
-    """
+    """Sidebar theme selector."""
 
     initialize_theme()
 
     st.sidebar.divider()
-    st.sidebar.subheader("🎨 Appearance")
+    st.sidebar.subheader("Appearance")
 
     selected_theme = st.sidebar.selectbox(
         "Theme",
@@ -139,49 +110,26 @@ def theme_selector():
     )
 
     st.session_state.dashboard_theme = selected_theme
-
-    st.sidebar.caption(f"Active palette: **{selected_theme}**")
+    st.sidebar.caption(f"Active palette: {selected_theme}")
 
     return get_theme(selected_theme)
 
 
-# --------------------------------------------------------
-# Helpers
-# --------------------------------------------------------
-
 def get_current_theme():
-    """
-    Return the current active theme.
-    """
+    """Return the current active theme."""
 
     initialize_theme()
-
-    return get_theme(
-        st.session_state.dashboard_theme
-    )
+    return get_theme(st.session_state.dashboard_theme)
 
 
 def get_plotly_layout():
-    """
-    Return a Plotly layout matching the
-    currently selected dashboard theme.
-    """
+    """Plotly layout for the currently selected theme."""
 
-    return plotly_layout(
-        get_current_theme()
-    )
+    return plotly_layout(get_current_theme())
 
-
-# --------------------------------------------------------
-# Main UI Initialisation
-# --------------------------------------------------------
 
 def initialize_ui():
-    """
-    Initialise the complete dashboard UI.
-
-    This should be called once from app.py.
-    """
+    """Initialise the complete dashboard UI. Call once from app.py."""
 
     theme = theme_selector()
     load_css(theme)

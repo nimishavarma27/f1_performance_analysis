@@ -7,7 +7,7 @@ def display_dashboard_overview(event, session):
     Display an overview of the selected Formula 1 event and session.
     """
     
-    st.header("🏁 Dashboard Overview")
+    st.header("Dashboard Overview")
 
 
     # Event Information
@@ -40,9 +40,9 @@ def display_dashboard_overview(event, session):
 
     col1, col2, col3, col4 = st.columns(4)
 
-    col1.metric("📅 Date", session_date)
-    col2.metric("🏎️ Session", session_name)
-    col3.metric("👥 Drivers", driver_count)
-    col4.metric("🏁 Laps", total_laps)
+    col1.metric("Date", session_date)
+    col2.metric("Session", session_name)
+    col3.metric("Drivers", driver_count)
+    col4.metric("Laps", total_laps)
 
     st.divider()

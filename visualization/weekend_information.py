@@ -11,7 +11,7 @@ def render_weekend_information(summary):
         Output from processing.weekend_summary.get_weekend_summary()
     """
 
-    with st.expander("🏁 Weekend Information", expanded=False):
+    with st.expander("Weekend Information", expanded=False):
 
         leaders = summary["leaders"]
 
@@ -70,7 +70,7 @@ def render_weekend_information(summary):
             if pole is not None:
 
                 st.metric(
-                    label="🏁 Pole Position",
+                    label="Pole Position",
                     value=pole["Driver"],
                     delta=pole["Time"]
                 )
@@ -78,7 +78,7 @@ def render_weekend_information(summary):
             else:
 
                 st.metric(
-                    label="🏁 Pole Position",
+                    label="Pole Position",
                     value="-"
                 )
 
@@ -91,7 +91,7 @@ def render_weekend_information(summary):
             if winner is not None:
 
                 st.metric(
-                    label="🥇 Race Winner",
+                    label="Race Winner",
                     value=winner["Driver"],
                     delta=winner["Team"]
                 )
@@ -99,7 +99,7 @@ def render_weekend_information(summary):
             else:
 
                 st.metric(
-                    label="🥇 Race Winner",
+                    label="Race Winner",
                     value="-"
                 )
 
@@ -112,7 +112,7 @@ def render_weekend_information(summary):
             if fastest_driver:
 
                 st.metric(
-                    label="⚡ Fastest Lap",
+                    label="Fastest Lap",
                     value=fastest_driver,
                     delta=fastest_time
                 )
@@ -120,7 +120,7 @@ def render_weekend_information(summary):
             else:
 
                 st.metric(
-                    label="⚡ Fastest Lap",
+                    label="Fastest Lap",
                     value="-"
                 )
 
@@ -132,9 +132,9 @@ def render_weekend_information(summary):
 
         tab1, tab2, tab3 = st.tabs(
             [
-                "📋 Session Leaders",
-                "🥇 Top 3",
-                "📍 Circuit Information"
+                "Session Leaders",
+                "Top 3",
+                "Circuit Information"
             ]
         )
 

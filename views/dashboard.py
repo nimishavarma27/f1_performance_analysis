@@ -47,7 +47,7 @@ def render_dashboard(
 
     st.divider()
 
-    st.header("🏁 Weekend Overview")
+    st.header("Weekend Overview")
 
     show_weekend = st.toggle(
 

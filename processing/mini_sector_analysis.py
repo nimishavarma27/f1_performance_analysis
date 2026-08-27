@@ -2,33 +2,21 @@
 Mini Sector Analysis
 ====================
 
-Divides the lap into equal mini sectors and determines
-which driver is fastest in each mini sector based on
-average speed.
+Divides the lap into equal mini sectors and determines which driver is
+fastest in each mini sector based on average speed.
 """
 
 import numpy as np
 import pandas as pd
 
+from utils.logger import logger
 
-def analyse(
-    telemetry_dictionary: dict,
-    sectors: int = 25
-):
-    """
-    Analyse mini sectors for all available drivers.
 
-    Parameters
-    ----------
-    telemetry_dictionary : dict
-        Telemetry dictionary produced by telemetry_engine.build()
+def analyse(telemetry_dictionary: dict, sectors: int = 25):
+    """Analyse mini sectors for all available drivers.
 
-    sectors : int
-        Number of mini sectors.
-
-    Returns
-    -------
-    pandas.DataFrame | None
+    Vectorised implementation: a single ``pd.cut`` + ``groupby`` per driver
+    replaces the 25 x N boolean scans of the original version.
     """
 
     if not telemetry_dictionary:
@@ -36,24 +24,16 @@ def analyse(
 
     valid_drivers = {}
 
-    # ----------------------------------------------------
-    # Validate telemetry
-    # ----------------------------------------------------
-
     for driver, driver_data in telemetry_dictionary.items():
-
         telemetry = driver_data.get("merged")
-
-
         if telemetry is None:
             continue
 
         required = {"Distance", "Speed"}
-
         if not required.issubset(telemetry.columns):
-            print(
-                f"[MiniSector] {driver} missing columns:"
-                f" {required - set(telemetry.columns)}"
+            logger.warning(
+                f"[MiniSector] {driver} missing columns: "
+                f"{required - set(telemetry.columns)}"
             )
             continue
 
@@ -62,68 +42,45 @@ def analyse(
     if not valid_drivers:
         return None
 
-    # ----------------------------------------------------
-    # Common lap distance
-    # ----------------------------------------------------
+    maximum_distance = min(t["Distance"].max() for t in valid_drivers.values())
+    boundaries = np.linspace(0, maximum_distance, sectors + 1)
+    labels = list(range(sectors))
 
-    maximum_distance = min(
+    per_driver_means = {}
+    for driver, telemetry in valid_drivers.items():
+        bins = pd.cut(
+            telemetry["Distance"],
+            bins=boundaries,
+            labels=labels,
+            include_lowest=True,
+            right=False,
+        )
+        per_driver_means[driver] = (
+            telemetry["Speed"].groupby(bins, observed=False).mean()
+        )
 
-        telemetry["Distance"].max()
-
-        for telemetry in valid_drivers.values()
-
-    )
-
-    boundaries = np.linspace(
-        0,
-        maximum_distance,
-        sectors + 1
-    )
+    speeds = pd.DataFrame(per_driver_means)
 
     results = []
-
-    # ----------------------------------------------------
-    # Analyse sectors
-    # ----------------------------------------------------
-
     for sector in range(sectors):
+        row = speeds.loc[sector] if sector in speeds.index else pd.Series(dtype=float)
+        row = row.dropna()
 
-        start = boundaries[sector]
-        end = boundaries[sector + 1]
+        if row.empty:
+            fastest_driver = None
+            fastest_speed = None
+        else:
+            fastest_driver = row.idxmax()
+            fastest_speed = round(float(row.max()), 2)
 
-        fastest_driver = None
-        fastest_speed = -1
-
-        for driver, telemetry in valid_drivers.items():
-
-            section = telemetry[
-                (telemetry["Distance"] >= start)
-                &
-                (telemetry["Distance"] < end)
-            ]
-
-            if section.empty:
-                continue
-
-            average_speed = section["Speed"].mean()
-
-            if average_speed > fastest_speed:
-
-                fastest_speed = average_speed
-                fastest_driver = driver
-
-        results.append({
-
-            "Mini Sector": sector + 1,
-            "Start (m)": round(start, 2),
-            "End (m)": round(end, 2),
-            "Fastest Driver": fastest_driver,
-            "Average Speed (km/h)": (
-                round(fastest_speed, 2)
-                if fastest_speed >= 0
-                else None
-            )
-
-        })
+        results.append(
+            {
+                "Mini Sector": sector + 1,
+                "Start (m)": round(float(boundaries[sector]), 2),
+                "End (m)": round(float(boundaries[sector + 1]), 2),
+                "Fastest Driver": fastest_driver,
+                "Average Speed (km/h)": fastest_speed,
+            }
+        )
 
     return pd.DataFrame(results)

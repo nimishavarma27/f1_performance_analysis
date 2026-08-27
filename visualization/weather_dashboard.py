@@ -31,19 +31,19 @@ def render_weather_dashboard(session) -> None:
     columns = st.columns(4)
     columns[0].metric(
         "Air temperature",
-        _value(summary["air_temperature"], " °C"),
+        _value(summary["air_temperature"], "°C"),
         None if air_min is None else f"Range {air_min:.1f}–{air_max:.1f} °C",
     )
     columns[1].metric(
         "Track temperature",
-        _value(summary["track_temperature"], " °C"),
+        _value(summary["track_temperature"], "°C"),
         None if track_min is None else f"Range {track_min:.1f}–{track_max:.1f} °C",
     )
     columns[2].metric("Humidity", _value(summary["humidity"], "%"))
     columns[3].metric(
         "Conditions",
         "Rain detected" if summary["rain_detected"] else "Dry samples",
-        _value(summary["wind_speed"], " km/h") + " average wind",
+        _value(summary["wind_speed"], "km/h") + "average wind",
     )
 
     temperature_columns = [

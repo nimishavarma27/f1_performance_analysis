@@ -42,7 +42,7 @@ def render_driver(
 
     st.divider()
 
-    st.header("👤 Driver Analysis")
+    st.header("Driver Analysis")
 
     # --------------------------------------------------------
     # Driver Statistics

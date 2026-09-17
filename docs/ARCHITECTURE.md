@@ -172,3 +172,24 @@ Modules that exist as scaffolding for planned features. Nothing in the current d
 ## Adding a new theme
 
 Add a new entry to the `THEMES` dict in `utils/theme.py` with the ten required colour keys (`background`, `secondary_background`, `card_background`, `plot_background`, `paper_background`, `text`, `muted_text`, `accent`, `accent_secondary`, `accent_contrast`, `grid`, `border`, plus optional `success`/`warning`/`error`). It automatically appears in the sidebar theme selector.
+
+## Adding a team colour (grid change maintenance)
+
+Driver rosters, team names, and the race calendar are pulled fresh from FastF1 at runtime, so the dashboard follows the sport automatically. The one exception is team brand colours: `utils/team_colors.py` holds a static map. When a new team joins or an existing one rebrands, add its entry so charts and legends use the right colour instead of the neutral grey fallback.
+
+```python
+# utils/team_colors.py
+TEAM_COLORS = {
+    "Red Bull": "#3671C6",
+    "Ferrari": "#E80020",
+    # ...
+    "Cadillac": "#000000",       # add the new team's hex here
+    "Audi": "#0F1D2D",           # example: Sauber's post-2026 rebrand
+}
+```
+
+Notes:
+- The key must match exactly what FastF1 puts in `session.laps["Team"]` for that year. If in doubt, load a session with the new team, print `session.laps["Team"].unique()`, and copy the string.
+- Teams that keep their name across seasons need no change.
+- Missing teams don't break anything — `get_team_color()` returns `#808080` as a fallback.
+- Both the old and new spelling can coexist in the dict (e.g. `"Sauber"` and `"Kick Sauber"` are both present today) so historical seasons keep the right colour.

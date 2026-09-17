@@ -19,9 +19,9 @@ An interactive Formula 1 analysis dashboard for lap times, sectors, tyres, strat
 
 ![Driver Analysis tab](docs/screenshots/driver.png) 
 
-![Comparison and Strategy tab](docs/screenshots/comparison.png) 
+![Comparison and Strategy tab](docs/screenshots/comparison.png)
 
-![Telemetry and Track tab](docs/screenshots/telemetry.png) 
+![Telemetry and Track tab](docs/screenshots/telemetry.png)
 
 _Try the [live demo](https://f1-analytics-performance.streamlit.app/)._
 

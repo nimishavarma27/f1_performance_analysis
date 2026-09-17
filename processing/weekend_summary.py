@@ -9,10 +9,7 @@ from utils.constants_codes import SESSION_CODES
 from utils.session_names import SESSION_NAMES
 
 
-# ==========================================================
 # Circuit Information
-# ==========================================================
-
 def get_circuit_information(event):
     """
     Returns circuit information.
@@ -27,10 +24,7 @@ def get_circuit_information(event):
     }
 
 
-# ==========================================================
 # Session Leader
-# ==========================================================
-
 def get_session_leader(session, session_code):
     """
     Returns leader information for a session.
@@ -38,10 +32,7 @@ def get_session_leader(session, session_code):
 
     try:
 
-        # --------------------------------------------------
         # Race & Sprint
-        # --------------------------------------------------
-
         if session_code in ["R", "S"]:
 
             results = (
@@ -83,10 +74,7 @@ def get_session_leader(session, session_code):
                 )
             }
 
-        # --------------------------------------------------
         # Practice / Qualifying
-        # --------------------------------------------------
-
         fastest = session.laps.pick_fastest()
 
         if fastest is None:
@@ -110,10 +98,7 @@ def get_session_leader(session, session_code):
         return None
 
 
-# ==========================================================
 # Top Three
-# ==========================================================
-
 def get_top_three(session, session_code):
     """
     Returns the top three drivers for a session.
@@ -121,10 +106,7 @@ def get_top_three(session, session_code):
 
     try:
 
-        # --------------------------------------------------
         # Race & Sprint
-        # --------------------------------------------------
-
         if session_code in ["R", "S"]:
 
             results = (
@@ -139,10 +121,7 @@ def get_top_three(session, session_code):
                 "Team": results["TeamName"].tolist()
             })
 
-        # --------------------------------------------------
         # Practice / Qualifying
-        # --------------------------------------------------
-
         fastest = (
             session.laps
             .dropna(subset=["LapTime"])
@@ -163,10 +142,7 @@ def get_top_three(session, session_code):
         return None
 
 
-# ==========================================================
 # Weekend Summary
-# ==========================================================
-
 @st.cache_data(show_spinner=False)
 def get_weekend_summary(year, grand_prix):
     """
@@ -176,10 +152,7 @@ def get_weekend_summary(year, grand_prix):
 
     event = fastf1.get_event(year, grand_prix)
 
-    # --------------------------------------------------
     # Load sessions in parallel
-    # --------------------------------------------------
-
     def load(code):
         return load_session_safe(
             year,
@@ -187,8 +160,7 @@ def get_weekend_summary(year, grand_prix):
             code
         )
 
-    # Timing-only loads are much smaller than telemetry loads. Limiting the
-    # workers avoids overwhelming FastF1's data sources on an uncached weekend.
+    # Timing-only loads are much smaller than telemetry loads. Limiting the workers avoids overwhelming FastF1's data sources on an uncached weekend.
     with ThreadPoolExecutor(max_workers=3) as executor:
 
         loaded_sessions = dict(
@@ -198,10 +170,7 @@ def get_weekend_summary(year, grand_prix):
     leaders = []
     top_three = {}
 
-    # --------------------------------------------------
     # Process sessions
-    # --------------------------------------------------
-
     for code, session in loaded_sessions.items():
 
         if session is None:

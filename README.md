@@ -123,6 +123,3 @@ Contributions are welcome. Keep calculation logic in `processing/` and presentat
 - Formula 1 and the FIA for the sport and timing ecosystem that make this analysis possible.
 - The Streamlit, Pandas, NumPy, and Plotly open-source communities.
 
-## License
-
-No license file yet — until one is added, treat the repository as all rights reserved by its owner.

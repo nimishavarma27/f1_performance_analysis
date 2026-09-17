@@ -29,7 +29,17 @@ def load_session(
     """
 
     try:
-        session = fastf1.get_session(year, grand_prix, session_type)
+        # Route the session's internal schedule lookup through FastF1's
+        # offline backend so it does not touch the rate-limited Ergast /
+        # Jolpica endpoints on Streamlit Cloud. Older FastF1 versions do
+        # not accept the backend keyword on get_session, so fall back.
+        try:
+            session = fastf1.get_session(
+                year, grand_prix, session_type, backend="fastf1"
+            )
+        except TypeError:
+            session = fastf1.get_session(year, grand_prix, session_type)
+
         session.load(
             laps=True,
             telemetry=telemetry,
@@ -38,9 +48,13 @@ def load_session(
         )
         laps = session.laps
     except Exception as error:
+        # Surface the underlying FastF1 exception so the visible error is
+        # diagnosable (timeout, 429, DataNotLoadedError, cache write etc.)
+        # instead of a generic "please try again".
         raise RuntimeError(
-            f"FastF1 could not load {grand_prix} {year} ({session_type}). "
-            "Please try again or select another completed session."
+            f"FastF1 could not load {grand_prix} {year} ({session_type}).\n\n"
+            f"Underlying error: {type(error).__name__}: {error}\n\n"
+            "Please try a different session or year."
         ) from error
 
     if laps is None:

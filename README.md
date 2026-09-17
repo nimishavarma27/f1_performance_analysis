@@ -112,13 +112,6 @@ Driver names, team names, race calendars, and session types all come from FastF1
 
 **One thing needs a manual edit**: team brand colours. When a genuinely new team joins the grid or an existing one rebrands to a new name (for example Cadillac in 2026, or Sauber becoming Audi), add its entry to `TEAM_COLORS` in [`utils/team_colors.py`](utils/team_colors.py). Until you do, the new team's charts fall back to neutral grey — everything else keeps working. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the one-line recipe.
 
-## Roadmap
-
-Short version — full details in the architecture doc.
-
-- **Now**: tabbed layout, session and telemetry caching, six themes, restrained styling, vectorised analyses. ✅
-- **Next**: dedicated two-driver head-to-head panel, distance-based delta-time chart, weather-aware lap filtering.
-- **Later**: typed session models, automated tests, GitHub Actions CI, hosted deployment.
 
 ## Contributing
 

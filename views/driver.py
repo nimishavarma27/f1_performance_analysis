@@ -44,10 +44,7 @@ def render_driver(
 
     st.header("Driver Analysis")
 
-    # --------------------------------------------------------
     # Driver Statistics
-    # --------------------------------------------------------
-
     statistics = get_driver_statistics(
         driver_data
     )
@@ -56,10 +53,7 @@ def render_driver(
         statistics
     )
 
-    # --------------------------------------------------------
     # Session Summary
-    # --------------------------------------------------------
-
     st.subheader("Session Summary")
 
     metric_columns = st.columns(
@@ -83,10 +77,7 @@ def render_driver(
 
             )
 
-    # --------------------------------------------------------
     # Sector Analysis
-    # --------------------------------------------------------
-
     st.subheader("Sector Analysis")
 
     for driver, data in driver_data.items():
@@ -111,10 +102,7 @@ def render_driver(
 
         )
 
-    # --------------------------------------------------------
     # Lap Time Analysis
-    # --------------------------------------------------------
-
     st.subheader("Lap Time Analysis")
 
     for driver, data in driver_data.items():
@@ -139,10 +127,7 @@ def render_driver(
 
         )
 
-    # --------------------------------------------------------
     # Tyre Performance Analysis
-    # --------------------------------------------------------
-
     st.subheader("Tyre Performance Analysis")
 
     for driver, data in driver_data.items():

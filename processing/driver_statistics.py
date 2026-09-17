@@ -44,38 +44,23 @@ def get_driver_statistics(driver_data):
         if valid_laps.empty:
             continue
 
-        # -------------------------------------------------
         # Fastest Lap
-        # -------------------------------------------------
-
         fastest_lap = valid_laps["LapTime"].min()
 
-        # -------------------------------------------------
         # Average Lap
-        # -------------------------------------------------
-
         average_lap = valid_laps["LapTime"].mean()
 
-        # -------------------------------------------------
         # Best Sectors
-        # -------------------------------------------------
-
         best_sector1 = valid_laps["Sector1Time"].min()
 
         best_sector2 = valid_laps["Sector2Time"].min()
 
         best_sector3 = valid_laps["Sector3Time"].min()
 
-        # -------------------------------------------------
         # Completed Laps
-        # -------------------------------------------------
-
         completed_laps = len(valid_laps)
 
-        # -------------------------------------------------
         # Tyre Stints
-        # -------------------------------------------------
-
         if "Stint" in valid_laps.columns:
 
             tyre_stints = valid_laps["Stint"].nunique()
@@ -84,10 +69,7 @@ def get_driver_statistics(driver_data):
 
             tyre_stints = 0
 
-        # -------------------------------------------------
         # Top Speed
-        # -------------------------------------------------
-
         if "SpeedST" in valid_laps.columns:
 
             top_speed = valid_laps["SpeedST"].max()
@@ -99,10 +81,7 @@ def get_driver_statistics(driver_data):
             top_speed = None
             average_speed = None
 
-        # -------------------------------------------------
         # Store
-        # -------------------------------------------------
-
         statistics[driver] = {
 
             "Fastest Lap": format_timedelta(fastest_lap),

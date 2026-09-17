@@ -1,9 +1,4 @@
-/* Global visual system. Palette values are injected by utils/ui.py.
-   No gradients, no drop shadows, no hover transforms, no custom web
-   fonts. System font, 1px borders, small radii, muted accents only. */
-
 :root {
-    /* Fallback fonts only. No Inter / Geist / Space Grotesk / etc. */
     --f1-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --f1-radius: 4px;
 }
@@ -21,7 +16,6 @@
     padding: 1.5rem 2rem 2.5rem;
 }
 
-/* Header block - flat, no gradient, no glow */
 .f1-hero {
     margin: 0 0 1.5rem;
     padding: 1.5rem 1.75rem;
@@ -57,7 +51,6 @@
     line-height: 1.5;
 }
 
-/* Typography - no coloured left stripe */
 h1, h2, h3, p, label, [data-testid="stMarkdownContainer"] {
     color: var(--f1-text);
     font-family: var(--f1-font);
@@ -101,7 +94,7 @@ div[data-baseweb="select"] * {
     color: var(--f1-text) !important;
 }
 
-/* Buttons - flat, no lift, no glow */
+/* Buttons */
 .stButton > button,
 .stDownloadButton > button {
     width: 100%;
@@ -112,7 +105,7 @@ div[data-baseweb="select"] * {
     font-weight: 500;
 }
 
-/* Cards, tables, charts - single border, no shadow, no hover animation */
+/* Cards, tables, charts */
 div[data-testid="metric-container"] {
     padding: 0.85rem 1rem;
     border: 1px solid var(--f1-border);
@@ -145,7 +138,7 @@ div[data-testid="stAlert"] {
     background: var(--f1-card-background);
 }
 
-/* Tabs - flat, underline on active */
+/* Tabs */
 button[data-baseweb="tab"] {
     border-radius: 0;
     color: var(--f1-muted-text);
@@ -160,7 +153,7 @@ button[data-baseweb="tab"][aria-selected="true"] {
 /* Streamlit chrome */
 footer, #MainMenu { visibility: hidden; }
 
-/* Scrollbars - neutral, no accent hover */
+/* Scrollbars */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--f1-background); }
 ::-webkit-scrollbar-thumb { background: var(--f1-border); }

@@ -14,11 +14,7 @@ It performs:
 
 import pandas as pd
 
-
-# ==========================================================
 # Available Metrics
-# ==========================================================
-
 SUPPORTED_METRICS = [
     "Speed",
     "Throttle",
@@ -29,10 +25,7 @@ SUPPORTED_METRICS = [
 ]
 
 
-# ==========================================================
 # Prepare Telemetry
-# ==========================================================
-
 def prepare(
     telemetry_dictionary,
     metric
@@ -86,10 +79,7 @@ def prepare(
     return prepared
 
 
-# ==========================================================
 # Driver Statistics
-# ==========================================================
-
 def calculate_statistics(
     telemetry_dictionary,
     metric
@@ -142,10 +132,7 @@ def calculate_statistics(
     return pd.DataFrame(rows)
 
 
-# ==========================================================
 # Available Metrics
-# ==========================================================
-
 def available_metrics(
     telemetry_dictionary
 ):

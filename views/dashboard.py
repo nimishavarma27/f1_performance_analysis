@@ -68,7 +68,6 @@ def render_dashboard(
             summary = get_weekend_summary(
 
                 year,
-
                 grand_prix
 
             )
@@ -82,7 +81,6 @@ def render_dashboard(
     display_dashboard_overview(
 
         event,
-
         session
 
     )

@@ -54,9 +54,18 @@ def load_session(
 
 @st.cache_data(show_spinner=False, ttl=3600)
 def get_event_schedule(year: int):
-    """Cached wrapper around ``fastf1.get_event_schedule``."""
+    """Cached wrapper around ``fastf1.get_event_schedule``.
 
-    return fastf1.get_event_schedule(year)
+    Prefers FastF1's built-in offline schedule backend to avoid the shared
+    Ergast/Jolpica rate limit (500 calls/hour per IP) that hits hard on
+    Streamlit Cloud, where many apps share an outbound IP. Falls back to
+    the default backend if the offline one is unavailable.
+    """
+
+    try:
+        return fastf1.get_event_schedule(year, backend="fastf1")
+    except Exception:
+        return fastf1.get_event_schedule(year)
 
 
 @st.cache_data(show_spinner=False, ttl=3600)
@@ -67,7 +76,14 @@ def get_available_sessions(year: int, grand_prix: str) -> list:
     calling ``event.get_session`` seven times per rerun.
     """
 
-    event = fastf1.get_event(year, grand_prix)
+    # Read the event row from the schedule (which we already fetched via the
+    # offline FastF1 backend) instead of calling fastf1.get_event(), which
+    # would re-hit the rate-limited Ergast/Jolpica API on Streamlit Cloud.
+    schedule = get_event_schedule(year)
+    matches = schedule[schedule["EventName"] == grand_prix]
+    if matches.empty:
+        return []
+    event = matches.iloc[0]
 
     name_to_code = {
         "Practice 1": "FP1",

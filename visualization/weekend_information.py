@@ -15,10 +15,7 @@ def render_weekend_information(summary):
 
         leaders = summary["leaders"]
 
-        # ======================================================
         # Metric Cards
-        # ======================================================
-
         pole = None
         winner = None
         fastest_driver = None
@@ -26,10 +23,7 @@ def render_weekend_information(summary):
 
         if not leaders.empty:
 
-            # ----------------------------------------------
             # Pole Position
-            # ----------------------------------------------
-
             pole_data = leaders[
                 leaders["Result"] == "Pole Position"
             ]
@@ -37,10 +31,7 @@ def render_weekend_information(summary):
             if not pole_data.empty:
                 pole = pole_data.iloc[0]
 
-            # ----------------------------------------------
             # Race Winner
-            # ----------------------------------------------
-
             race_data = leaders[
                 leaders["Result"] == "Race Winner"
             ]
@@ -61,10 +52,7 @@ def render_weekend_information(summary):
 
         col1, col2, col3 = st.columns(3)
 
-        # --------------------------------------------------
         # Pole Position
-        # --------------------------------------------------
-
         with col1:
 
             if pole is not None:
@@ -82,10 +70,7 @@ def render_weekend_information(summary):
                     value="-"
                 )
 
-        # --------------------------------------------------
         # Race Winner
-        # --------------------------------------------------
-
         with col2:
 
             if winner is not None:
@@ -103,10 +88,7 @@ def render_weekend_information(summary):
                     value="-"
                 )
 
-        # --------------------------------------------------
         # Fastest Lap
-        # --------------------------------------------------
-
         with col3:
 
             if fastest_driver:
@@ -126,10 +108,7 @@ def render_weekend_information(summary):
 
         st.divider()
 
-        # ======================================================
         # Tabs
-        # ======================================================
-
         tab1, tab2, tab3 = st.tabs(
             [
                 "Session Leaders",
@@ -138,10 +117,7 @@ def render_weekend_information(summary):
             ]
         )
 
-        # ======================================================
         # Session Leaders
-        # ======================================================
-
         with tab1:
 
             if leaders.empty:
@@ -166,10 +142,7 @@ def render_weekend_information(summary):
                     hide_index=True
                 )
 
-        # ======================================================
         # Top Three
-        # ======================================================
-
         with tab2:
 
             if not summary["top3"]:
@@ -200,10 +173,7 @@ def render_weekend_information(summary):
                         hide_index=True
                     )
 
-        # ======================================================
         # Circuit Information
-        # ======================================================
-
         with tab3:
 
             circuit = summary["circuit"]

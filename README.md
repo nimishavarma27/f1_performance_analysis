@@ -9,6 +9,8 @@ An interactive Formula 1 analysis dashboard for lap times, sectors, tyres, strat
 
 **Try it live**: [f1-analytics-performance.streamlit.app](https://f1-analytics-performance.streamlit.app/)
 
+> **Note on the live demo**: it runs on Streamlit Community Cloud's free tier, which shares an outbound IP address with many other apps that use the same F1 data API. When the shared 500-calls-per-hour quota is exhausted, session loading pauses for the rest of the hour and the app shows a clear "rate limit reached" message. Cloning the repo and running the app on your own machine has **no such limit** and always works — that's the recommended way to actually use it. Instructions are in [Quick start](#quick-start) below.
+
 > Educational and portfolio project. Not affiliated with Formula 1, the FIA, or any Formula 1 team.
 
 ---

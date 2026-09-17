@@ -14,8 +14,11 @@ An interactive Formula 1 analysis dashboard for lap times, sectors, tyres, strat
 ## Screenshots
 
 ![Weekend Overview tab](docs/screenshots/weekend.png)
+
 ![Driver Analysis tab](docs/screenshots/driver.png)
+
 ![Comparison and Strategy tab](docs/screenshots/comparison.png)
+
 ![Telemetry and Track tab](docs/screenshots/telemetry.png)
 
 

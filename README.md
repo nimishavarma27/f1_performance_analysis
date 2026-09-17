@@ -2,10 +2,12 @@
 
 An interactive Formula 1 analysis dashboard for lap times, sectors, tyres, strategy, weather, and telemetry — built on top of the [FastF1](https://docs.fastf1.dev/) open-source timing data.
 
+[![Live demo](https://img.shields.io/badge/live%20demo-online-brightgreen)](https://f1-analytics-performance.streamlit.app/)
 ![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/streamlit-1.32+-FF4B4B?logo=streamlit&logoColor=white)
 ![FastF1](https://img.shields.io/badge/FastF1-3.4+-0A0A0A)
-![Status](https://img.shields.io/badge/status-active-brightgreen)
+
+**Try it live**: [f1-analytics-performance.streamlit.app](https://f1-analytics-performance.streamlit.app/)
 
 > Educational and portfolio project. Not affiliated with Formula 1, the FIA, or any Formula 1 team.
 
@@ -13,14 +15,15 @@ An interactive Formula 1 analysis dashboard for lap times, sectors, tyres, strat
 
 ## Screenshots
 
-![Weekend Overview tab](docs/screenshots/weekend.png)
+![Weekend Overview tab](docs/screenshots/weekend.png)  
 
-![Driver Analysis tab](docs/screenshots/driver.png)
+![Driver Analysis tab](docs/screenshots/driver.png) 
 
-![Comparison and Strategy tab](docs/screenshots/comparison.png)
+![Comparison and Strategy tab](docs/screenshots/comparison.png) 
 
-![Telemetry and Track tab](docs/screenshots/telemetry.png)
+![Telemetry and Track tab](docs/screenshots/telemetry.png) 
 
+_Try the [live demo](https://f1-analytics-performance.streamlit.app/)._
 
 ---
 
@@ -112,6 +115,13 @@ Driver names, team names, race calendars, and session types all come from FastF1
 
 **One thing needs a manual edit**: team brand colours. When a genuinely new team joins the grid or an existing one rebrands to a new name (for example Cadillac in 2026, or Sauber becoming Audi), add its entry to `TEAM_COLORS` in [`utils/team_colors.py`](utils/team_colors.py). Until you do, the new team's charts fall back to neutral grey — everything else keeps working. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the one-line recipe.
 
+## Roadmap
+
+Short version — full details in the architecture doc.
+
+- **Now**: tabbed layout, session and telemetry caching, six themes, restrained styling, vectorised analyses. ✅
+- **Next**: dedicated two-driver head-to-head panel, distance-based delta-time chart, weather-aware lap filtering.
+- **Later**: typed session models, automated tests, GitHub Actions CI, hosted deployment.
 
 ## Contributing
 
@@ -123,3 +133,6 @@ Contributions are welcome. Keep calculation logic in `processing/` and presentat
 - Formula 1 and the FIA for the sport and timing ecosystem that make this analysis possible.
 - The Streamlit, Pandas, NumPy, and Plotly open-source communities.
 
+## License
+
+No license file yet — until one is added, treat the repository as all rights reserved by its owner.

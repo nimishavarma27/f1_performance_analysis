@@ -14,10 +14,7 @@ import pandas as pd
 from utils.ui import get_plotly_layout
 
 
-# ==========================================================
 # Axis Labels
-# ==========================================================
-
 AXIS_LABELS = {
 
     "Speed": "Speed (km/h)",
@@ -35,10 +32,7 @@ AXIS_LABELS = {
 }
 
 
-# ==========================================================
 # Statistics
-# ==========================================================
-
 def statistics(dataframe, metric):
 
     series = dataframe[metric].dropna()
@@ -57,10 +51,7 @@ def statistics(dataframe, metric):
     }
 
 
-# ==========================================================
 # Dashboard
-# ==========================================================
-
 def render(
     telemetry_dictionary,
     driver_data

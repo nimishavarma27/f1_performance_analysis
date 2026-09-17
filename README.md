@@ -106,6 +106,12 @@ f1_performance_analysis/
 
 For a full per-file reference, layering diagram, and instructions on adding a tab or theme, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
+## Keeping up with the grid
+
+Driver names, team names, race calendars, and session types all come from FastF1 at runtime, so grid changes (new drivers, drivers switching teams, new races) show up automatically the moment FastF1 has data for them.
+
+**One thing needs a manual edit**: team brand colours. When a genuinely new team joins the grid or an existing one rebrands to a new name (for example Cadillac in 2026, or Sauber becoming Audi), add its entry to `TEAM_COLORS` in [`utils/team_colors.py`](utils/team_colors.py). Until you do, the new team's charts fall back to neutral grey — everything else keeps working. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the one-line recipe.
+
 ## Roadmap
 
 Short version — full details in the architecture doc.

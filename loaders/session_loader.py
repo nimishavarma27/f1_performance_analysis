@@ -76,8 +76,27 @@ def load_session(
                 "  streamlit run app.py"
             ) from error
 
-        # Surface the underlying FastF1 exception so the visible error is
-        # diagnosable (timeout, DataNotLoadedError, cache write etc.).
+        # A session that exists in the schedule but has no published timing
+        # data yet (very recent or future-dated rounds) raises
+        # DataNotLoadedError. Tell the user plainly rather than showing the
+        # raw "See Session.load" internal reference.
+        is_no_data = (
+            "DataNotLoaded" in error_name
+            or "has not been loaded" in error_text
+            or "no data" in error_text.lower()
+        )
+        if is_no_data:
+            raise RuntimeError(
+                f"No timing data is available yet for {grand_prix} {year} "
+                f"({session_type}).\n\n"
+                "This usually means the session hasn't happened yet, or its "
+                "data has not been published to the F1 timing service. Pick a "
+                "different Grand Prix or an earlier season from the sidebar - "
+                "seasons 2018 to 2024 are fully archived."
+            ) from error
+
+        # Surface any other underlying FastF1 exception so the visible error
+        # is diagnosable (timeout, cache write, etc.).
         raise RuntimeError(
             f"FastF1 could not load {grand_prix} {year} ({session_type}).\n\n"
             f"Underlying error: {error_name}: {error}\n\n"

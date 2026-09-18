@@ -28,6 +28,11 @@ theme = initialize_ui()
 
 EARLIEST_YEAR = 2018
 
+# The app lands on this season by default. It is a fully-archived year with
+# complete FastF1 data, so first-time visitors never hit a session whose data
+# is missing. Every other year (including the current one) stays selectable.
+DEFAULT_YEAR = 2024
+
 SESSION_LABELS = {
     "FP1": "Practice 1",
     "FP2": "Practice 2",
@@ -56,7 +61,8 @@ st.sidebar.header("Session")
 current_year = datetime.now().year
 years = list(range(current_year, EARLIEST_YEAR - 1, -1))
 
-year = st.sidebar.selectbox("Season", years)
+default_year_index = years.index(DEFAULT_YEAR) if DEFAULT_YEAR in years else 0
+year = st.sidebar.selectbox("Season", years, index=default_year_index)
 
 try:
     schedule = get_event_schedule(year)
